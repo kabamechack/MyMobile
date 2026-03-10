@@ -6,6 +6,7 @@ import HomeScreen from '../screens/HomeScreen';
 import MenuScreen from '../screens/MenuScreen';
 import CartScreen from '../screens/CartScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import AppHeader from '../components/AppHeader'; 
 
 type RootTabParamList = {
   Home: undefined;
@@ -27,7 +28,15 @@ function BottomTabs() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        headerShown: false,
+        // 1. Enable the header
+        headerShown: true, 
+        // 2. Inject your custom header component
+        header: () => (
+          <AppHeader 
+            title={route.name} 
+            isHome={route.name === 'Home'} 
+          />
+        ),
         tabBarStyle: {
           backgroundColor: COLORS.background,
         },
@@ -52,3 +61,4 @@ function BottomTabs() {
 }
 
 export default BottomTabs;
+
